@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Almacén</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 350px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    input {
+        width: 80%;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #2a5298;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1e3c72;
+    }
+
+    #resultado {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .ok {
+        color: green;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📦 Buscar Producto</h2>
+
+    <input id="codigo" placeholder="Ej: C200" autofocus>
+    <br>
+    <button onclick="buscar()">Buscar</button>
+
+    <p id="resultado"></p>
+</div>
+
+<script>
+const productos = {
+    "PRO-033": "Pasillo 2, Rack A",
+    "PAP-001": "Pasillo 5, Rack B",
+    "L101": "Pasillo 3, Rack C",
+    "A150": "Pasillo 1, Rack D"
+};
+
+function buscar() {
+    let codigo = document.getElementById("codigo").value.trim().toUpperCase();
+    let resultado = document.getElementById("resultado");
+
+    if (productos[codigo]) {
+        resultado.innerHTML = "📍 Ubicación:<br>" + productos[codigo];
+        resultado.className = "ok";
+    } else {
+        resultado.innerHTML = "❌ Código no encontrado";
+        resultado.className = "error";
+    }
+}
+
+// Buscar con ENTER
+document.getElementById("codigo").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        buscar();
+    }
+});
+</script>
+
+</body>
+</html>
